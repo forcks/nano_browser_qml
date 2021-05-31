@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("appEngine",&_appEngine);
 
     engine.load(url);
+    _appEngine.addPage();
 
     return app.exec();
 }

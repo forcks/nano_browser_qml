@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>BrowserPage.qml</file>
+        <file>CustomTabButton.qml</file>
     </qresource>
 </RCC>

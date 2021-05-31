@@ -17,4 +17,5 @@ void appEngine::search(QString url)
 void appEngine::addPage()
 {
     setPage();
+    qDebug()<<"go";
 }
