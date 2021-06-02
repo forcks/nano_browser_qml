@@ -11,6 +11,9 @@ TabButton{
     property var _text: "page"
     property var index: 0
     text: qsTr(_text)
+    background: Rectangle{
+        color: "#f5f5f5"
+    }
     Button{
         width: parent.width/10
         height: parent.height/1.5
@@ -18,6 +21,8 @@ TabButton{
         anchors.left: parent.left
         text: qsTr("*")
         font.pixelSize: (parent.height)/2
+
+
         onClicked: {
             appEngine.deletePage(index)
         }
