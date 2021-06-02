@@ -1,10 +1,11 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
-import QtWebView 1.1
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.12
 import QtQml 2.15
+
+import QtWebView 1.1
 
 ApplicationWindow {
     id:root
@@ -34,11 +35,12 @@ ApplicationWindow {
             }
         }
     }
-    footer:
-        TabBar{
+    TabBar{
         id:tabbar
         width: parent.width
-        //anchors.top: page.bottom
+        height: parent.height/25
+        anchors.top: page.bottom
+        anchors.left: parent.left
 
         Connections{
             target: appEngine

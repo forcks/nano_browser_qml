@@ -9,14 +9,14 @@ import QtQml 2.15
 Item {
     id:root
     Rectangle{
+        id:tools
         width: parent.width
-        height: parent.height/25
+        height: parent.height/20
         anchors.top: parent.top
         anchors.left: parent.left
         color: "#181818"
         RowLayout{
             spacing: 10
-            id:tools
             anchors.fill: parent
             Layout.alignment: Qt.AlignCenter
             Button{
@@ -196,13 +196,23 @@ Item {
                 Layout.maximumHeight: 30
 
                 Layout.fillWidth: true
-                text: qsTr("Go")
+                //text: qsTr("Go")
                 onClicked: {
                     appEngine.search(inputAdress.text);
                 }
                 background: Rectangle{
                     color: "#f5f5f5"
                     radius: (root.width+root.height)/250
+                }
+                Item {
+                    width: parent.height/1.8
+                    height: parent.height/1.8
+                    anchors.centerIn: parent
+                    Image{
+                        anchors.fill: parent
+                        fillMode: Image.PreserveAspectFit
+                        source: "/img/search.png"
+                    }
                 }
             }
             Button{
@@ -211,7 +221,7 @@ Item {
                 Layout.preferredHeight: width
                 Layout.minimumWidth: 10
                 Layout.minimumHeight: 10
-                font.pixelSize: parent.height/100
+                font.pixelSize: parent.height/150
 
                 Layout.maximumWidth: 30
                 Layout.maximumHeight: 30
@@ -226,34 +236,37 @@ Item {
                     radius: (root.width+root.height)/250
                 }
             }
+
         }
 
-        ProgressBar{
-            value: webView.loadProgress/100
-            width: parent.width
-            anchors.top: tools.bottom
-            anchors.left: parent.left
-            z:1
+
+
+
+    }
+    ProgressBar{
+        id:progressBarPage
+        value: webView.loadProgress/100
+        width: parent.width
+        anchors.top: tools.bottom
+        anchors.left: parent.left
+        z:1
+    }
+    WebView{
+        id: webView
+        url: "https://www.google.com"
+        width: parent.width
+        height: parent.height-tools.height-progressBarPage.height
+        anchors.top: tools.bottom
+        anchors.left: parent.left
+        onUrlChanged: {
+            appEngine.getUrl(webView.url);
         }
 
-        WebView{
-            id: webView
-            url: "https://www.google.com"
-            width: parent.width
-            height: parent.height-tools.height
-            anchors.top: tools.bottom
-            anchors.left: parent.left
-            onUrlChanged: {
-                appEngine.getUrl(webView.url);
-            }
-
-            Connections{
-                target: appEngine
-                function onSetUrl(url){
-                    webView.url = url
-                }
+        Connections{
+            target: appEngine
+            function onSetUrl(url){
+                webView.url = url
             }
         }
     }
 }
-

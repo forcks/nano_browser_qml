@@ -11,20 +11,38 @@ TabButton{
     property var _text: "page"
     property var index: 0
     text: qsTr(_text)
-    background: Rectangle{
-        color: "#f5f5f5"
-    }
+    /*
+    Text {
+        text: qsTr(_text)
+        color: "#FFADAD"
+        font.pixelSize: parent.width/70 <= 10 ? 10 : parent.width/60
+        anchors.centerIn: parent
+    }*/
+
     Button{
-        width: parent.width/10
-        height: parent.height/1.5
-        anchors.top: parent.top
+        width: height
+        height: parent.height/2.2
+        anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        text: qsTr("*")
+        //text: qsTr("*")
         font.pixelSize: (parent.height)/2
-
-
+        background: Rectangle{
+            radius: (parent.height)/5
+            Image{
+                width: parent.width/1.2
+                height: parent.height/1.2
+                anchors.centerIn: parent
+                fillMode: Image.PreserveAspectFit
+                source: "/img/cross.png"
+            }
+        }
         onClicked: {
             appEngine.deletePage(index)
         }
     }
+
+
+
+
 }
+
