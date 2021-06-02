@@ -9,6 +9,17 @@ import QtQml 2.15
 TabButton{
     id:root
     property var _text: "page"
-    height: parent.height
+    property var index: 0
     text: qsTr(_text)
+    Button{
+        width: parent.width/10
+        height: parent.height/1.5
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: qsTr("*")
+        font.pixelSize: (parent.height)/2
+        onClicked: {
+            appEngine.deletePage(index)
+        }
+    }
 }

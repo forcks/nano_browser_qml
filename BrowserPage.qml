@@ -11,76 +11,137 @@ Item {
     Rectangle{
         id:tools
         width: parent.width
-        height: parent.height/10
+        height: parent.height/25
         anchors.top: parent.top
         anchors.left: parent.left
+        color: "#191919"
 
         Button{
             id: backPage
-            width: parent.width/17
-            height: parent.height/4
+            width: height
+            height: parent.height /1.3
             anchors.left: parent.left
             anchors.top: parent.top
-            anchors.margins: (parent.width+parent.height)/90
+            anchors.margins: (parent.width+parent.height)/150
             font.pixelSize: (parent.width+parent.height)/95
-            text: qsTr("<")
+            //text: qsTr("<")
             onClicked: {
                 webView.goBack()
             }
             background: Rectangle{
-                color: "#C0C0C0"
-                radius: (root.width+root.height)/200
+                color: "#f5f5f5"
+                radius: (root.width+root.height)/250
+            }
+            Item {
+                width: parent.height/1.8
+                height: parent.height/1.8
+                anchors.centerIn: parent
+                rotation: 180
+                Image{
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+                    source: "/img/arrow.png"
+                }
             }
         }
 
 
         Button{
             id:nextPage
-            width: parent.width/17
-            height: parent.height/4
+            width: height
+            height: parent.height /1.3
             anchors.left: backPage.right
             anchors.top: parent.top
-            anchors.margins: (parent.width+parent.height)/90
+            anchors.margins: (parent.width+parent.height)/150
             font.pixelSize: (parent.width+parent.height)/95
-            text: qsTr(">")
+            //text: qsTr(">")
             onClicked: {
                 webView.goForward()
             }
 
             background: Rectangle{
-                color: "#C0C0C0"
-                radius: (root.width+root.height)/200
+                color: "#f5f5f5"
+                radius: (root.width+root.height)/250
+            }
+            Item {
+                width: parent.height/1.8
+                height: parent.height/1.8
+                anchors.centerIn: parent
+                Image{
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+                    source: "/img/arrow.png"
+                }
+            }
+        }
+
+        Button{
+            id:reload
+            width: height
+            height: parent.height /1.3
+            anchors.left: nextPage.right
+            anchors.top: parent.top
+            anchors.margins: (parent.width+parent.height)/150
+            font.pixelSize: (parent.width+parent.height)/95
+            //text: qsTr(">")
+            onClicked: {
+                webView.reload()
+            }
+
+            background: Rectangle{
+                color: "#f5f5f5"
+                radius: (root.width+root.height)/250
+            }
+            Item {
+                width: parent.height/1.8
+                height: parent.height/1.8
+                anchors.centerIn: parent
+                Image{
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+                    source: "/img/reload.png"
+                }
             }
         }
 
         Button{
             id:home
-            width: parent.width/17
-            height: parent.height/4
-            anchors.left: nextPage.right
+            width: height
+            height: parent.height /1.3
+            anchors.left: reload.right
             anchors.top: parent.top
-            anchors.margins: (parent.width+parent.height)/90
+            anchors.margins: (parent.width+parent.height)/150
             font.pixelSize: (parent.width+parent.height)/95
-            text: qsTr("home")
+            //text: qsTr("home")
             onClicked: {
                 webView.url = "https://google.com"
             }
 
             background: Rectangle{
-                color: "#C0C0C0"
-                radius: (root.width+root.height)/200
+                color: "#f5f5f5"
+                radius: (root.width+root.height)/250
+            }
+            Item {
+                width: parent.height/1.8
+                height: parent.height/1.8
+                anchors.centerIn: parent
+                Image{
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+                    source: "/img/home.png"
+                }
             }
         }
 
         Rectangle{
             id:inputAdressRec
-            width: parent.width/1.6
-            height: parent.height/4
+            width: home.x + search.x
+            height: parent.height /1.5
             anchors.left: home.right
-            anchors.top: parent.top
+            anchors.verticalCenter: home.verticalCenter
             anchors.margins: (parent.width+parent.height)/90
-            color: "#C0C0C0"
-            radius: (parent.width+parent.height)/90
+            color: "#f5f5f5"
+            radius: (parent.width+parent.height)/150
             TextInput{
                 id:inputAdress
                 width: parent.width - (parent.width+parent.height)/30
@@ -107,52 +168,53 @@ Item {
         }
         Button{
             id:search
-            width: parent.width/20
-            height: parent.height/4
-            anchors.left: inputAdressRec.right
+            width: height
+            height: parent.height /1.3
+            anchors.right: newTab.left
             anchors.top: parent.top
-            anchors.margins: (parent.width+parent.height)/90
-            font.pixelSize: (parent.width+parent.height)/95
+            anchors.margins: (parent.width+parent.height)/150
+            font.pixelSize: parent.height/4
             text: qsTr("Go")
             onClicked: {
                 appEngine.search(inputAdress.text);
             }
             background: Rectangle{
-                color: "#C0C0C0"
-                radius: (root.width+root.height)/200
+                color: "#f5f5f5"
+                radius: (root.width+root.height)/250
             }
         }
         Button{
             id:newTab
-            width: parent.width/20
-            height: parent.height/4
-            anchors.left: search.right
+            width: height
+            height: parent.height /1.3
+            anchors.right: parent.right
             anchors.top: parent.top
-            anchors.margins: (parent.width+parent.height)/90
-            font.pixelSize: parent.height/7
+            anchors.margins: (parent.width+parent.height)/150
+            font.pixelSize: parent.height/3
             text: qsTr("+")
             onClicked: {
                 appEngine.addPage();
             }
             background: Rectangle{
-                color: "#C0C0C0"
-                radius: (root.width+root.height)/200
+                color: "#f5f5f5"
+                radius: (root.width+root.height)/250
             }
         }
-        ProgressBar{
-            value: webView.loadProgress/100
-            width: parent.width
-            height:parent.height/6
-            anchors.top: search.bottom
-            anchors.left: parent.left
-        }
+    }
+
+    ProgressBar{
+        value: webView.loadProgress/100
+        width: parent.width
+        anchors.top: tools.bottom
+        anchors.left: parent.left
+        z:1
     }
 
     WebView{
         id: webView
         url: "https://www.google.com"
         width: parent.width
-        height: (parent.height / 10) * 9 - ((parent.height / 30) + (parent.height / 30))
+        height: parent.height-tools.height
         anchors.top: tools.bottom
         anchors.left: parent.left
         onUrlChanged: {
@@ -167,3 +229,4 @@ Item {
         }
     }
 }
+

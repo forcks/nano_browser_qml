@@ -17,5 +17,9 @@ void appEngine::search(QString url)
 void appEngine::addPage()
 {
     setPage();
-    qDebug()<<"go";
+}
+
+void appEngine::deletePage(QString index)
+{
+    destroyPage(index);
 }

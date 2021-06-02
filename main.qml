@@ -15,38 +15,50 @@ ApplicationWindow {
 
     //property var tabPage: TabButton {height: (root.height / 30);text: qsTr("new page")}
 
-    TabBar{
-        id:tabbar
-        width: parent.width
-        height: (root.height / 30)
-        anchors.bottom: parent.bottom
-        z:1
 
-        Connections{
-            target: appEngine
-            function onSetPage(){
-                var obj = Qt.createComponent("CustomTabButton.qml")
-                var obj2 = obj.createObject(tabbar,{_text:"page "+(tabbar.count+1)});
-                tabbar.addItem(obj2)
-            }
-        }
-    }
 
     StackLayout {
-        id:tabs
+        id:page
         width: parent.width
-        height: (parent.height * 1.1)  - ((parent.height / 30) + (parent.height / 30))
+        height: parent.height - tabbar.height
+        anchors.top: parent.top
+        anchors.left: parent.left
         z:0
         currentIndex: tabbar.currentIndex
         Repeater{
             model: tabbar.count
             BrowserPage{
+                id:browserPage
                 Layout.fillHeight : true
                 Layout.fillWidth : true
             }
         }
     }
+    footer:
+        TabBar{
+        id:tabbar
+        width: parent.width
+        //anchors.top: page.bottom
+
+        Connections{
+            target: appEngine
+            function onSetPage(){
+                var obj = Qt.createComponent("CustomTabButton.qml")
+                var obj2 = obj.createObject(tabbar,{_text:"page "+(tabbar.count+1),index:tabbar.count});
+                tabbar.addItem(obj2)
+            }
+
+            function onDestroyPage(index){
+                if(index != 0 ){
+                    var _removeItem = tabbar.itemAt(index);
+                    tabbar.removeItem(_removeItem);
+                    tabbar.setCurrentIndex(0)
+                }
+            }
+        }
+    }
 }
+
 
 
 
